@@ -35,6 +35,10 @@ class TestQueensState(unittest.TestCase):
         state.chessboard[0][2] = 1
         self.assertEqual(state.queens(),[(0,2)])
 
+    def test_emptyList_queen_initially(self):
+        state = QueensState(4,4)
+        self.assertEqual(state.queens(), [])
+
 
 if __name__ == '__main__':
     unittest.main()
