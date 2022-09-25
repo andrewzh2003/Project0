@@ -75,8 +75,12 @@ class QueensState:
 
 
     def queen_count(self) -> int:
-        """Returns the number of queens on the chessboard."""
-        return 0
+        total = 0
+        for i in self.chessboard:
+            for j in i:
+                if j == 1:
+                    total += 1
+        return total
 
 
     def queens(self) -> list[Position]:

@@ -25,6 +25,11 @@ class TestQueensState(unittest.TestCase):
         state = QueensState(2,2)
         self.assertEqual(state.chessboard, [[0,0],[0,0]])
 
+    def test_queen_count_after_initializing(self):
+        state = QueensState(4,4)
+        state.chessboard[0][2] = 1
+        self.assertEqual(state.queen_count(), 1)
+
 
 if __name__ == '__main__':
     unittest.main()
