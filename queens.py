@@ -66,6 +66,12 @@ class QueensState:
         with no queens occupying any of its cells."""
         self.rows = rows
         self.columns = columns
+        self.chessboard = []
+        for i in range(rows):
+            self.chessboard.append([])
+            for j in range(columns):
+                self.chessboard[i].append(0)
+
 
 
     def queen_count(self) -> int:
