@@ -108,14 +108,71 @@ class QueensState:
     def any_queens_unsafe(self) -> bool:
         """Returns True if any queens on the chessboard are unsafe (i.e., they can
         be captured by at least one other queen on the chessboard), or False otherwise."""
-        pass
+        total = 0
+        for i in range(self.rows):
+            for j in range(self.columns):
+                if self.chessboard[i][j] == 1:
+                    for z in range(self.rows):
+                        if self.chessboard[z][j] == 1:
+                            total += 1
+                    if total > 1:
+                        return True
+                    total = 0
+                    for x in range(self.columns):
+                        if self.chessboard[i][x] == 1:
+                            total += 1
+                    if total > 1:
+                        return True
+                    total = 0
+
+        for i in range(self.rows):
+            for j in range(self.columns):
+                if self.chessboard[i][j] == 1:
+                    total = 0
+                    row = i
+                    column = j
+                    while True:
+                        if (0 <= row < self.rows) and (0 <= column < self.columns):
+                            if self.chessboard[row][column] == 1:
+                                total += 1
+                            if total > 1:
+                                return True
+                            else:
+                                row -= 1
+                                column -= 1
+                        else:
+                            break
+                    total = 0
+                    row = i
+                    column = j
+                    while True:
+                        if (0 <= row < self.rows) and (0 <= column < self.columns):
+                            if self.chessboard[row][column] == 1:
+                                total += 1
+                            if total > 1:
+                                return True
+                            else:
+                                row -= 1
+                                column += 1
+                        else:
+                            break
+
+
+        return False
 
 
     def with_queens_added(self, positions: list[Position]) -> 'QueensState':
         """Builds a new QueensState with queens added in the given positions.
         Raises a DuplicateQueenException when there is already a queen in at
         least one of the given positions."""
-        pass
+        state = Queenstate(self.rows, self.columns)
+        for i in positions:
+            if self.has_queen(i) == True:
+                raise DuplicateQueenError
+            else:
+                state.chessboard[(position[0]) -1][(position[1] -1)] = 1
+
+        return state
 
 
     def with_queens_removed(self, positions: list[Position]) -> 'QueensState':

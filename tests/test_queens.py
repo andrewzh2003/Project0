@@ -49,6 +49,29 @@ class TestQueensState(unittest.TestCase):
         state.chessboard[1][0] = 1
         self.assertEqual(state.has_queen(point), True)
 
+    def test_any_queen_unsafe(self):
+        #tests for false
+        state = QueensState(4,4)
+
+        self.assertEqual(state.any_queens_unsafe(), False) ## empty
+        state.chessboard[0][1] = 1
+        self.assertEqual(state.any_queens_unsafe(), False)# one
+        state.chessboard[1][3] = 1
+        self.assertEqual(state.any_queens_unsafe(), False) ## two
+        state.chessboard[2][0] = 1
+        self.assertEqual(state.any_queens_unsafe(), False) ## three
+        state.chessboard[3][2] = 1
+        self.assertEqual(state.any_queens_unsafe(), False) #3 four (this is optimal any more and it is true)
+
+        #tests for true
+        state.chessboard[0][0] = 1
+        self.assertEqual(state.any_queens_unsafe(), True) ## checking if any more placed is false
+
+        state2 = QueensState(4,4)
+        state2.chessboard[2][1] = 1
+        state2.chessboard[3][0] = 1
+        print(state2.chessboard)
+        self.assertEqual(state2.any_queens_unsafe(), True) ## checking diagonal test
 
 
     # def test_has_queen_true(self):
