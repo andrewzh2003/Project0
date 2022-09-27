@@ -165,12 +165,12 @@ class QueensState:
         """Builds a new QueensState with queens added in the given positions.
         Raises a DuplicateQueenException when there is already a queen in at
         least one of the given positions."""
-        state = Queenstate(self.rows, self.columns)
+        state = QueensState(self.rows, self.columns)
         for i in positions:
             if self.has_queen(i) == True:
-                raise DuplicateQueenError
+                raise DuplicateQueenError(i)
             else:
-                state.chessboard[(position[0]) -1][(position[1] -1)] = 1
+                state.chessboard[(i[0]) -1][(i[1] -1)] = 1
 
         return state
 

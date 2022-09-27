@@ -73,6 +73,20 @@ class TestQueensState(unittest.TestCase):
         print(state2.chessboard)
         self.assertEqual(state2.any_queens_unsafe(), True) ## checking diagonal test
 
+    def test_with_queens_added(self):
+        ## no error
+        Position = namedtuple('Position', ['row', 'column'])
+        point1 = Position(2,2)
+        point2 = Position(2,1)
+        point3 = Position(3,2)
+        state = QueensState(4,4)
+        state.chessboard[2][3] = 1
+        x = state.with_queens_added([point1,point2,point3])
+        print(x.chessboard)
+
+        #error
+        point4 = Position(3,4)
+        x2 = state.with_queens_added([point1, point2, point3, point4])
 
     # def test_has_queen_true(self):
     #     Position = namedtuple('Position', ['row', 'column'])
