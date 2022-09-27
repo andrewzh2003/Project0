@@ -13,7 +13,7 @@
 
 from queens import QueensState
 import unittest
-
+from collections import namedtuple
 
 
 class TestQueensState(unittest.TestCase):
@@ -39,6 +39,22 @@ class TestQueensState(unittest.TestCase):
         state = QueensState(4,4)
         self.assertEqual(state.queens(), [])
 
+    def test_has_queen_false(self):
+        Position = namedtuple('Position', ['row', 'column'])
+        state = QueensState(2, 2)
+        point = Position(2, 1)
+        self.assertEqual(state.has_queen(point), False)
+        state.chessboard[1][1] = 1
+        self.assertEqual(state.has_queen(point), False)
+        state.chessboard[1][0] = 1
+        self.assertEqual(state.has_queen(point), True)
+
+
+
+    # def test_has_queen_true(self):
+    #     Position = namedtuple('Position', ['row', 'column'])
+    #     point = Position(4,4)
+    #     state = QueensState(2,4)
 
 if __name__ == '__main__':
     unittest.main()

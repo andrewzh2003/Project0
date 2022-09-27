@@ -98,7 +98,11 @@ class QueensState:
     def has_queen(self, position: Position) -> bool:
         """Returns True if a queen occupies the given position on the chessboard, or
         False otherwise."""
-        pass
+        if self.chessboard[(position[0]) -1][(position[1] -1)] == 1:
+            return True
+        else:
+            return False
+
 
 
     def any_queens_unsafe(self) -> bool:
@@ -119,3 +123,4 @@ class QueensState:
         Raises a MissingQueenException when there is no queen in at least one of
         the given positions."""
         pass
+
