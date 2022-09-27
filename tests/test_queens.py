@@ -70,7 +70,7 @@ class TestQueensState(unittest.TestCase):
         state2 = QueensState(4,4)
         state2.chessboard[2][1] = 1
         state2.chessboard[3][0] = 1
-        print(state2.chessboard)
+
         self.assertEqual(state2.any_queens_unsafe(), True) ## checking diagonal test
 
     def test_with_queens_added(self):
@@ -82,16 +82,29 @@ class TestQueensState(unittest.TestCase):
         state = QueensState(4,4)
         state.chessboard[2][3] = 1
         x = state.with_queens_added([point1,point2,point3])
-        print(x.chessboard)
+
 
         #error
         point4 = Position(3,4)
         x2 = state.with_queens_added([point1, point2, point3, point4])
 
-    # def test_has_queen_true(self):
-    #     Position = namedtuple('Position', ['row', 'column'])
-    #     point = Position(4,4)
-    #     state = QueensState(2,4)
+    def test_with_queens_removed(self):
+        Position = namedtuple('Position', ['row', 'column'])
+        point1 = Position(2, 2)
+        point2 = Position(2, 1)
+        point3 = Position(3, 2)
+        point4 = Position(1, 1)
+        state = QueensState(4, 4)
+        state.chessboard[2][3] = 1
+        x = state.with_queens_added([point1, point2, point3])
+        print(x.chessboard)
+
+        y = x.with_queens_removed([point1, point2]) # works
+        print(y.chessboard)
+        print(x.chessboard)
+
+        x.with_queens_removed([point1, point2, point4]) # doesn't work
+
 
 if __name__ == '__main__':
     unittest.main()

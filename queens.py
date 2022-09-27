@@ -166,6 +166,9 @@ class QueensState:
         Raises a DuplicateQueenException when there is already a queen in at
         least one of the given positions."""
         state = QueensState(self.rows, self.columns)
+        for i in range(self.rows):
+            for j in range(self.columns):
+                state.chessboard[i][j] = self.chessboard[i][j]
         for i in positions:
             if self.has_queen(i) == True:
                 raise DuplicateQueenError(i)
@@ -179,5 +182,15 @@ class QueensState:
         """Builds a new QueensState with queens removed from the given positions.
         Raises a MissingQueenException when there is no queen in at least one of
         the given positions."""
-        pass
+        state = QueensState(self.rows,self.columns)
+        for i in range(self.rows):
+            for j in range(self.columns):
+                state.chessboard[i][j] = self.chessboard[i][j]
+        for i in positions:
+            if self.has_queen(i) == True:
+                state.chessboard[i[0] - 1][i[1] -1] = 0
+            else:
+                raise MissingQueenError(i)
+
+        return state
 
